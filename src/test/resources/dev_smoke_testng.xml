@@ -7,8 +7,8 @@
                 <include name="smoke"/>
             </run>
         </groups>
-        <classes>
-            <class name="com.hudl.tests.HomePageTest"/>
-        </classes>
+        <packages>
+            <package name="com.hudl.tests"/>
+        </packages>
     </test>
 </suite>

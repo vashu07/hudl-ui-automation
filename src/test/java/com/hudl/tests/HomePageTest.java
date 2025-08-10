@@ -14,10 +14,10 @@ public class HomePageTest extends BaseTest {
     LoginPage loginPage;
     HomePage homePage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void loginAndNavigateToHomePage() {
-        loginPage = new LoginPage(page);
-        homePage = new HomePage(page);
+        this.loginPage = new LoginPage(page);
+        this.homePage = new HomePage(page);
         loginPage.login(regionManager.getLoginUrl(), regionManager.getUserName(), regionManager.getPassword());
         assertThat(page).hasURL(regionManager.getHomePageUrl());
     }
