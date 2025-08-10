@@ -15,7 +15,7 @@ public class LoginTest extends BaseTest {
 
     private static final String invalidUserNameAndPassword = RandomStringUtils.randomAlphabetic(8);
 
-    @Test
+    @Test(description = "verify if user can successfully login with valid credentials", groups = {"smoke"})
     public void verifySuccessfulLogin() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigate(regionManager.getLoginUrl());
@@ -26,7 +26,7 @@ public class LoginTest extends BaseTest {
         loginPage.logout();
     }
 
-    @Test
+    @Test(description = "verify the error message displayed for an invalid username")
     public void verifyLoginForInvalidUserName() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigate(regionManager.getLoginUrl());
@@ -34,7 +34,7 @@ public class LoginTest extends BaseTest {
         assertTrue(loginPage.getInvalidUserName(), INVALID_USERNAME_VALIDATION_MESSAGE);
     }
 
-    @Test()
+    @Test(description = "verify the error message displayed for an invalid password")
     public void verifyLoginForInvalidPassword() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigate(regionManager.getLoginUrl());
@@ -43,18 +43,18 @@ public class LoginTest extends BaseTest {
         assertTrue(loginPage.getInvalidPassword(), INVALID_PASSWORD_VALIDATION_MESSAGE);
     }
 
-    @Test
+    @Test(description = "verify if show password is clickable")
     public void verifyIfShowPasswordIsClickable() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigate(regionManager.getLoginUrl());
         loginPage.enterUserName(regionManager.getUserName());
         loginPage.enterPassword(invalidUserNameAndPassword);
-        assertThat(page.locator(loginPage.passwordLocator)).hasAttribute("type", "password");
+        assertThat(loginPage.getPassWordInPutSelector()).hasAttribute("type", "password");
         loginPage.getShowPassword().click();
-        assertThat(page.locator(loginPage.passwordLocator)).hasAttribute("type", "text");
+        assertThat(loginPage.getPassWordInPutSelector()).hasAttribute("type", "text");
     }
 
-    @Test(retryAnalyzer = com.hudl.utils.RetryAnalyzer.class)
+    @Test(description = "verify retry analyzer for failing scenario",retryAnalyzer = com.hudl.utils.RetryAnalyzer.class)
     public void verifyRetryAnalyzer() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigate(regionManager.getLoginUrl());

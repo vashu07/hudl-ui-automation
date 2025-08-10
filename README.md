@@ -52,12 +52,13 @@ The framework follows the **Page Object Model (POM)** design pattern for better 
    
 2. To run locally using testNg file
    ```bash
-    mvn clean install -U -DsuiteXmlFile=testng.xml -Dgrid=dev
+     mvn clean install -U -DsuiteXmlFile=src/test/resources/testng.xml -Dgrid=dev
    ``` 
    
 3. Allure Reporting
     ```bash
    To generate html page from json file
+     -[] cd target
      -[] allure generate allure-results --clean -o allure-report
    
    To open the report in browser

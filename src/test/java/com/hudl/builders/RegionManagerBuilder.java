@@ -20,9 +20,9 @@ public class RegionManagerBuilder {
 
     public static RegionManagerWto buildRegionConfig() throws IOException {
         Path path = Paths.get(System.getProperty("user.dir", "../")).getParent();
-        String rootRecourcePath = Paths.get(path.toString(), "hudl-ui-automation", "src/test/resources/cfg", grid + ".json").toString();
-        String json = FileUtils.readFileToString(new File(rootRecourcePath), StandardCharsets.UTF_8);
-        logger.info("Fetching environment variables from path: {}" + json);
+        String rootResourcePath = Paths.get(path.toString(), "hudl-ui-automation", "src", "test", "resources", "cfg", grid + ".json").toString();
+        String json = FileUtils.readFileToString(new File(rootResourcePath), StandardCharsets.UTF_8);
+        logger.info("Fetching environment variables from path: " + json);
         return new Gson().fromJson(json, RegionManagerWto.class);
 
     }

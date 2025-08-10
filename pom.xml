@@ -38,6 +38,19 @@
                 <grid>dev</grid>
             </properties>
         </profile>
+        <profile>
+            <id>smoke</id>
+            <activation>
+                <property>
+                    <name>Grid</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+            <properties>
+                <suiteXmlFile>src/test/resources/dev_smoke_testng.xml</suiteXmlFile>
+                <grid>dev</grid>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencyManagement>

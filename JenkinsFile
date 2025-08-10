@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    environment {
+      GRID = "${env.Grid}"
+    }
+
+    stages {
+        stage('Dev') {
+            steps {
+                echo "Running tests on DEV environment"
+                sh 'mvn clean install -U -DsuiteXmlFile=src/test/resources/testng.xml -Dgrid=dev'
+            }
+        }
+
+        stage('QA') {
+            steps {
+                echo "Running tests on QA environment"
+                sh 'mvn clean install -U -DsuiteXmlFile=src/test/resources/testng.xml -Dgrid=qa'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
