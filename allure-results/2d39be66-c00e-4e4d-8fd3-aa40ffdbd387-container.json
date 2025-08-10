@@ -1,1 +1,0 @@
-{"uuid":"2d39be66-c00e-4e4d-8fd3-aa40ffdbd387","name":"com.hudl.tests.BaseTest.setUp","children":["677b9f47-8660-4152-ac52-93bc07672dbd"],"description":"","befores":[{"name":"setUp","status":"broken","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1754834542410,"stop":1754834542411}],"afters":[],"start":1754834542410,"stop":1754834542411}
