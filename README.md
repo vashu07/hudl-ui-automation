@@ -9,6 +9,12 @@ This project contains automated UI tests built using:
 The framework follows the **Page Object Model (POM)** design pattern for better maintainability and scalability.
 
 ---
+## ⚙️ Prerequisites
+- Java 21 installed
+- Maven 3.11.0 installed
+- Playwright dependency
+- testNg dependency
+---
 
 ## 📂 Project Structure
 ```
@@ -33,24 +39,17 @@ The framework follows the **Page Object Model (POM)** design pattern for better 
 
 ---
 
-## ⚙️ Prerequisites
-- Java 21 installed
-- Maven 3.8+ installed
-- Playwright dependency
-- testNg dependency
-
----
-
 ## 📦 Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
+   git clone git@github.com:vashu07/hudle-ui-automation.git
 
 ## 📦 Run Configuration
-1. To skip tests
+1. To clean install and skip tests
     ```bash
     mvn clean install -Dmaven.test.skip=true  
     ``` 
+   
 2. To run locally using testNg file
    ```bash
     mvn clean install -U -DsuiteXmlFile=testng.xml -Dgrid=dev
@@ -58,8 +57,11 @@ The framework follows the **Page Object Model (POM)** design pattern for better 
    
 3. Allure Reporting
     ```bash
-    allure generate allure-results --clean -o allure-report
-    allure open allure-report
+   To generate html page from json file
+     -[] allure generate allure-results --clean -o allure-report
+   
+   To open the report in browser
+     -[] allure open allure-report
     ```
 
 
