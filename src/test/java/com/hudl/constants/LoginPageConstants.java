@@ -12,4 +12,6 @@ public class LoginPageConstants {
         public static final String LOG_OUT = "Log Out";
         public static final String SHOW_PASSWORD_BUTTON = "Show password";
 
+        public static final String LOG_IN_SUCCESSFUL= "Logged in successfully";
+
 }

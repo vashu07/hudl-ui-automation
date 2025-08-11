@@ -71,7 +71,7 @@ public class LoginPage {
         enterUserName(username);
         enterPassword(password);
         waitForPageToLoad();
-        logger.info("Logged in successfully");
+        logger.info(LOG_IN_SUCCESSFUL);
     }
 
     public void logout() {

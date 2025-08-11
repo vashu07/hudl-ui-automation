@@ -1,7 +1,8 @@
 package com.hudl.constants;
 
 public class HomePageConstants {
-    private HomePageConstants() {}
+    private HomePageConstants() {
+    }
 
     public static final String SEARCH_PLACEHOLDER = "Search for athletes, teams,";
     public static final String NEWCASTLE_JETS_LINK_TEXT = "Newcastle Jets FC";
@@ -15,9 +16,8 @@ public class HomePageConstants {
     public static final String YOUR_TEAMS_TEXT = "Your Teams";
     public static final String SUGGESTIONS_TEXT = "Suggestions";
     public static final String MORE_SUGGESTIONS_BUTTON_TEXT = "More Suggestions";
-    public static final String SEARCH_TERM = "test";
-    public static final String SEARCH_ITEM = "tt test test soccer Hudl";
+    public static final String SEARCH_ITEM = "test";
     public static final String FEED_SELECTOR = "//div[@class='explore-tab explore-tab__home current']";
-    public static final String SEARCH_RESULTS = "//div[@class='search-results']";
+    public static final String SEARCH_RESULTS = "//div[@class='app__search-results']";
 
 }

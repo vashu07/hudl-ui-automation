@@ -3,15 +3,21 @@ package com.hudl.pages;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.logging.Logger;
 
 import static com.hudl.constants.HomePageConstants.*;
 
+@Slf4j
 public class HomePage {
+
+    private static final Logger logger = Logger.getLogger(HomePage.class.getName());
 
     private final Page page;
 
-//    Locators
-    private final Locator searchInput;
+    //    Locators
+    private final Locator searchInputLocator;
     private final Locator newcastleJetsLink;
     private final Locator libraryLink;
     private final Locator reportsLink;
@@ -23,12 +29,12 @@ public class HomePage {
     private final Locator yourTeamsText;
     private final Locator suggestionsText;
     private final Locator moreSuggestionsButton;
-    private final Locator searchItem;
+    private final Locator search;
 
     public HomePage(Page page) {
         this.page = page;
 
-        this.searchInput = page.getByPlaceholder(SEARCH_PLACEHOLDER);
+        this.searchInputLocator = page.getByPlaceholder(SEARCH_PLACEHOLDER);
         this.newcastleJetsLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(NEWCASTLE_JETS_LINK_TEXT));
         this.libraryLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(LIBRARY_LINK_TEXT));
         this.reportsLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(REPORTS_LINK_TEXT));
@@ -40,15 +46,11 @@ public class HomePage {
         this.yourTeamsText = page.getByText(YOUR_TEAMS_TEXT, new Page.GetByTextOptions().setExact(true));
         this.suggestionsText = page.getByText(SUGGESTIONS_TEXT, new Page.GetByTextOptions().setExact(true));
         this.moreSuggestionsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(MORE_SUGGESTIONS_BUTTON_TEXT));
-        this.searchItem = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(SEARCH_ITEM));
+        this.search = page.locator(SEARCH_RESULTS);
     }
 
-
-    public void searchFor(String searchTerm) {
-        searchInput.click();
-        searchInput.fill(searchTerm);
-        page.evaluate(SEARCH_RESULTS);
-        searchItem.click();
+    public Locator getSearch() {
+        return search;
     }
 
     public Locator getNewCastleJetsLocator() {
@@ -95,4 +97,16 @@ public class HomePage {
         return moreSuggestionsButton;
     }
 
+    //    Actions
+    public void searchForAnItemAndClick(String searchText) {
+        logger.info("Searching for text: '{}'" + searchText);
+        searchFor(searchText);
+        searchInputLocator.first().click();
+    }
+
+    public void searchFor(String searchText) {
+        logger.info("Searching for text: " + searchText);
+        searchInputLocator.click();
+        searchInputLocator.fill(searchText);
+    }
 }

@@ -7,4 +7,6 @@ public class ErrorMessageConstants {
 
     public static final String INVALID_USERNAME_VALIDATION_MESSAGE = "validation failed for invalid username";
     public static final String INVALID_PASSWORD_VALIDATION_MESSAGE = "validation failed for invalid username";
+    public static final String EXPECTED_ELEMENT_NOT_VISIBLE_MESSAGE = "Expected element is not visible";
+
 }
