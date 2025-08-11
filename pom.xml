@@ -28,10 +28,7 @@
         <profile>
             <id>dev</id>
             <activation>
-                <property>
-                    <name>Grid</name>
-                    <value>dev</value>
-                </property>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
@@ -40,12 +37,6 @@
         </profile>
         <profile>
             <id>smoke</id>
-            <activation>
-                <property>
-                    <name>Grid</name>
-                    <value>dev</value>
-                </property>
-            </activation>
             <properties>
                 <suiteXmlFile>src/test/resources/dev_smoke_testng.xml</suiteXmlFile>
                 <grid>dev</grid>
@@ -143,16 +134,6 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.11.2</version>
-                <configuration>
-                    <resultsDirectory>target/allure-results</resultsDirectory>
-                    <reportDirectory>target/allure-report</reportDirectory>
                 </configuration>
             </plugin>
         </plugins>

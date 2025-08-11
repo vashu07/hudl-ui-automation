@@ -3,6 +3,7 @@ package com.hudl.tests;
 
 import com.hudl.pages.HomePage;
 import com.hudl.pages.LoginPage;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -22,8 +23,13 @@ public class HomePageTest extends BaseTest {
         assertThat(page).hasURL(regionManager.getHomePageUrl());
     }
 
-    @Test(description = "verify all the elements in home page", groups = {"smoke"})
-    public void verifyAllElementsInLoginPage() {
+    @AfterMethod(alwaysRun = true)
+    public void logout() {
+        loginPage.logout();
+    }
+
+    @Test(description = "verify home page displays all core elements", groups = {"smoke"}, priority = 1)
+    public void homePageShouldDisplayAllCoreElements() {
         assertThat(homePage.getNewCastleJetsLocator()).isVisible();
         assertThat(homePage.getLibraryLocator()).isVisible();
         assertThat(homePage.getReportsLocator()).isVisible();
@@ -35,13 +41,11 @@ public class HomePageTest extends BaseTest {
         assertThat(homePage.getYourTeamsLocator()).isVisible();
         assertThat(homePage.getSuggestionsLocator()).isVisible();
         assertThat(homePage.getMoreSuggestionsLocator()).isVisible();
-        loginPage.logout();
     }
 
-    @Test(description = "verify search functionality")
+    @Test(description = "verify search functionality", priority = 2)
     public void verifySearchTextBox() {
         homePage.searchFor(SEARCH_TERM);
-        loginPage.logout();
     }
 
 }

@@ -17,5 +17,7 @@ public class HomePageConstants {
     public static final String MORE_SUGGESTIONS_BUTTON_TEXT = "More Suggestions";
     public static final String SEARCH_TERM = "test";
     public static final String SEARCH_ITEM = "tt test test soccer Hudl";
+    public static final String FEED_SELECTOR = "//div[@class='explore-tab explore-tab__home current']";
+    public static final String SEARCH_RESULTS = "//div[@class='search-results']";
 
 }

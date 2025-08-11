@@ -55,7 +55,16 @@ The framework follows the **Page Object Model (POM)** design pattern for better 
      mvn clean install -U -DsuiteXmlFile=src/test/resources/testng.xml -Dgrid=dev
    ``` 
    
-3. Allure Reporting
+3. To select profile from pom.xml and execute tests
+   ```bash
+   To trigger smoke test suite 
+   mvn clean test -Psmoke -Dgrid=dev
+   
+   To trigger regression test suite  
+   mvn test -Dgrid=dev
+   ``` 
+   
+4. Allure Reporting
     ```bash
    To generate html page from json file
      -[] cd target

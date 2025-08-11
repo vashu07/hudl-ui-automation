@@ -3,12 +3,18 @@ package com.hudl.pages;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitForSelectorState;
+
+import java.util.logging.Logger;
 
 import static com.hudl.constants.ErrorMessageConstants.INVALID_PASSWORD_ERROR_MESSAGE;
 import static com.hudl.constants.ErrorMessageConstants.INVALID_USERNAME_ERROR_MESSAGE;
+import static com.hudl.constants.HomePageConstants.FEED_SELECTOR;
+import static com.hudl.constants.HomePageConstants.NEWCASTLE_JETS_LINK_TEXT;
 import static com.hudl.constants.LoginPageConstants.*;
 
 public class LoginPage {
+    private static final Logger logger = Logger.getLogger(LoginPage.class.getName());
     private final Page page;
 
     //    Locators
@@ -21,7 +27,6 @@ public class LoginPage {
     private final Locator invalidUserNameError;
     private final Locator invalidPasswordError;
     private final Locator showPasswordButton;
-
 
     public LoginPage(Page page) {
         this.page = page;
@@ -39,6 +44,12 @@ public class LoginPage {
 
     public void navigate(String url) {
         page.navigate(url);
+    }
+
+    public void waitForPageToLoad() {
+        logger.info("Waiting for page to load");
+        page.waitForSelector(FEED_SELECTOR, new Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE));
+        logger.info("Page loaded successfully");
     }
 
     public void enterUserName(String username) {
@@ -59,6 +70,8 @@ public class LoginPage {
         navigate(url);
         enterUserName(username);
         enterPassword(password);
+        waitForPageToLoad();
+        logger.info("Logged in successfully");
     }
 
     public void logout() {

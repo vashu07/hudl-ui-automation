@@ -47,6 +47,7 @@ public class HomePage {
     public void searchFor(String searchTerm) {
         searchInput.click();
         searchInput.fill(searchTerm);
+        page.evaluate(SEARCH_RESULTS);
         searchItem.click();
     }
 

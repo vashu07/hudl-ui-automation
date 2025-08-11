@@ -54,7 +54,7 @@ public class LoginTest extends BaseTest {
         assertThat(loginPage.getPassWordInPutSelector()).hasAttribute("type", "text");
     }
 
-    @Test(description = "verify retry analyzer for failing scenario",retryAnalyzer = com.hudl.utils.RetryAnalyzer.class)
+    @Test(description = "verify retry analyzer for failing scenario")
     public void verifyRetryAnalyzer() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigate(regionManager.getLoginUrl());

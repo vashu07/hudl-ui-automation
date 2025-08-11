@@ -1,17 +1,21 @@
 package com.hudl.tests;
 
+import com.hudl.builders.RegionManagerBuilder;
+import com.hudl.utils.AllureUtils;
 import com.hudl.wtos.RegionManagerWto;
 import com.microsoft.playwright.*;
-import io.qameta.allure.Allure;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.util.logging.Logger;
 
 import static com.hudl.builders.RegionManagerBuilder.buildRegionConfig;
 
 public class BaseTest {
+
+    private static final Logger logger = Logger.getLogger(BaseTest.class.getName());
+
     protected Playwright playwright;
     protected Browser browser;
     protected BrowserContext context;
@@ -19,6 +23,7 @@ public class BaseTest {
     protected RegionManagerWto regionManager = new RegionManagerWto();
     public static String grid = System.getenv("grid") != null ? System.getenv("grid") : System.getProperty("grid");
 
+//    TODO: Move this to BeforeSuite and AfterSuite
     @Parameters({"browserName"})
     @BeforeMethod(alwaysRun = true)
     public void setUp(@Optional("chrome") String browserName) throws IOException {
@@ -35,6 +40,7 @@ public class BaseTest {
             case "chromium":
             default:
                 browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100));
+//                browser = playwright.chromium().launch();
                 break;
         }
         context = browser.newContext();
@@ -44,8 +50,7 @@ public class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
-            byte[] screenshot = page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("target/screenshot.png")));
-            Allure.addAttachment("Screenshot on Failure", "image/png", new java.io.ByteArrayInputStream(screenshot), ".png");
+            AllureUtils.attachScreenshot(page);
         }
         if (context != null) context.close();
 

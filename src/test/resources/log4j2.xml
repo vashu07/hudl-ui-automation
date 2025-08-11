@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="appender" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-5level | %logger{36}:%L - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="appender"/>
+        </Root>
+
+        <Logger name="com.hudl.*" level="info" additivity="false">
+            <AppenderRef ref="appender"/>
+        </Logger>
+    </Loggers>
+</Configuration>

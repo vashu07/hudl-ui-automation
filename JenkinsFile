@@ -22,6 +22,9 @@ pipeline {
     }
 
     post {
+        always {
+              allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+        }
         success {
             echo 'Pipeline completed successfully!'
         }
