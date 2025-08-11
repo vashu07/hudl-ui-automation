@@ -4,10 +4,7 @@ import com.hudl.utils.AllureUtils;
 import com.hudl.wtos.RegionManagerWto;
 import com.microsoft.playwright.*;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -18,33 +15,37 @@ public class BaseTest {
 
     private static final Logger logger = Logger.getLogger(BaseTest.class.getName());
 
-    protected Playwright playwright;
-    protected Browser browser;
+    protected static Playwright playwright;
+    protected static Browser browser;
+    protected static RegionManagerWto regionManager;
     protected BrowserContext context;
     protected Page page;
-    protected RegionManagerWto regionManager = new RegionManagerWto();
     public static String grid = System.getenv("grid") != null ? System.getenv("grid") : System.getProperty("grid");
 
-//    TODO: Move this to BeforeSuite and AfterSuite
     @Parameters({"browserName"})
-    @BeforeMethod(alwaysRun = true)
-    public void setUp(@Optional("chrome") String browserName) throws IOException {
+    @BeforeSuite(alwaysRun = true)
+    public void beforeSuite(@Optional("chrome") String browserName) throws IOException {
+        logger.info("--- Test Suite Starting ---");
         regionManager = buildRegionConfig();
         playwright = Playwright.create();
 
         switch (browserName.toLowerCase()) {
             case "firefox":
-                browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100));
+                browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
                 break;
             case "webkit":
-                browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100));
+                browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
                 break;
             case "chromium":
             default:
-//                browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100));
+//                browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
                 browser = playwright.chromium().launch();
                 break;
         }
+    }
+
+    @BeforeMethod(alwaysRun = true)
+    public void setUp() throws IOException {
         context = browser.newContext();
         page = context.newPage();
     }
@@ -55,10 +56,11 @@ public class BaseTest {
             AllureUtils.attachScreenshot(page);
         }
         if (context != null) context.close();
+    }
 
+    @AfterSuite(alwaysRun = true)
+    public void afterSuite() {
         if (browser != null) browser.close();
-
         if (playwright != null) playwright.close();
-
     }
 }

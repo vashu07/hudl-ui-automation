@@ -21,9 +21,9 @@ import static org.testng.Assert.assertTrue;
 
 public class HomePageTest extends BaseTest {
 
-    LoginPage loginPage;
-    HomePage homePage;
-    AboutPage aboutPage;
+    private LoginPage loginPage;
+    private HomePage homePage;
+    private AboutPage aboutPage;
 
     @BeforeMethod(alwaysRun = true)
     public void loginAndNavigateToHomePage() {
@@ -73,7 +73,6 @@ public class HomePageTest extends BaseTest {
         assertTrue(aboutPage.isAboutVisible() || aboutPage.isTimeLineVisible(), EXPECTED_ELEMENT_NOT_VISIBLE_MESSAGE);
     }
 
-
     /**
      * Login -> Navigate to home page
      * Search a text in search text box
@@ -87,7 +86,6 @@ public class HomePageTest extends BaseTest {
         searchResults.first().click();
         WaitUtils.waitForElementVisible(page, TIMELINE_SELECTOR, 5000);
         assertTrue(aboutPage.isAboutVisible() || aboutPage.isTimeLineVisible(),EXPECTED_ELEMENT_NOT_VISIBLE_MESSAGE);
-
     }
 
 }

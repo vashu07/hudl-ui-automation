@@ -67,11 +67,10 @@ The framework follows the **Page Object Model (POM)** design pattern for better 
 4. Allure Reporting
     ```bash
    To generate html page from json file
-     -[] cd target
-     -[] allure generate allure-results --clean -o allure-report
+      allure generate allure-results --clean -o allure-report
    
    To open the report in browser
-     -[] allure open allure-report
+       allure open allure-report
     ```
 
 
