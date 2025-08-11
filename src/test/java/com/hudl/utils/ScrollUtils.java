@@ -17,7 +17,7 @@ public class ScrollUtils {
      * @param scrollStep pixels to scroll each time (e.g., 500)
      * @param maxScrolls max number of scroll attempts to avoid infinite loops
      * @param waitMs wait time in milliseconds after each scroll
-     * TODO: Make this better
+     * TODO: con
      */
     public static Locator infiniteScrollInContainer(Page page, String containerSelector, int scrollStep, int maxScrolls, int waitMs) {
         Locator container = page.locator(containerSelector);

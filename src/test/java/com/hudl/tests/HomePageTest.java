@@ -5,11 +5,14 @@ import com.hudl.pages.AboutPage;
 import com.hudl.pages.HomePage;
 import com.hudl.pages.LoginPage;
 import com.hudl.utils.ScrollUtils;
+import com.hudl.utils.WaitUtils;
 import com.microsoft.playwright.Locator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.hudl.constants.AboutPageConstants.TIMELINE;
+import static com.hudl.constants.AboutPageConstants.TIMELINE_SELECTOR;
 import static com.hudl.constants.ErrorMessageConstants.EXPECTED_ELEMENT_NOT_VISIBLE_MESSAGE;
 import static com.hudl.constants.HomePageConstants.SEARCH_ITEM;
 import static com.hudl.constants.HomePageConstants.SEARCH_RESULTS;
@@ -66,7 +69,7 @@ public class HomePageTest extends BaseTest {
     public void verifySearchTextBox() {
         homePage.searchForAnItemAndClick(SEARCH_ITEM);
         homePage.getSearch().first().click();
-        page.waitForTimeout(5000);
+        WaitUtils.waitForElementVisible(page, TIMELINE_SELECTOR, 5000);
         assertTrue(aboutPage.isAboutVisible() || aboutPage.isTimeLineVisible(), EXPECTED_ELEMENT_NOT_VISIBLE_MESSAGE);
     }
 
@@ -82,6 +85,7 @@ public class HomePageTest extends BaseTest {
         homePage.searchFor(SEARCH_ITEM);
         Locator searchResults = ScrollUtils.infiniteScrollInContainer(page, SEARCH_RESULTS, 200, 4, 1000);
         searchResults.first().click();
+        WaitUtils.waitForElementVisible(page, TIMELINE_SELECTOR, 5000);
         assertTrue(aboutPage.isAboutVisible() || aboutPage.isTimeLineVisible(),EXPECTED_ELEMENT_NOT_VISIBLE_MESSAGE);
 
     }
